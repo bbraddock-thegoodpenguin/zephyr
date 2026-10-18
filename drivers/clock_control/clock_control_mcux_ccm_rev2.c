@@ -9,7 +9,7 @@
 #include <zephyr/drivers/clock_control.h>
 #include <zephyr/dt-bindings/clock/imx_ccm_rev2.h>
 #include <fsl_clock.h>
-#if defined(CONFIG_SOC_MIMX9352)
+#if defined(CONFIG_SOC_MIMX9596_M33) || defined(CONFIG_SOC_MIMX9352)
 #include <soc.h>
 #endif
 
@@ -142,7 +142,7 @@ static int mcux_ccm_get_subsys_rate(const struct device *dev,
 #else
 	case IMX_CCM_LPUART1_CLK:
 	case IMX_CCM_LPUART2_CLK:
-		clock_root = kCLOCK_Root_Lpuart1 + instance;
+		clock_root = CLOCK_ROOT_LPUART1 + instance;
 		break;
 #endif
 #endif
@@ -417,7 +417,7 @@ static int mcux_ccm_get_subsys_rate(const struct device *dev,
 	default:
 		return -EINVAL;
 	}
-#if defined(CONFIG_SOC_MIMX9352) || defined(CONFIG_SOC_MIMX9131) \
+#if defined(CONFIG_SOC_MIMX9596_M33) || defined(CONFIG_SOC_MIMX9352) || defined(CONFIG_SOC_MIMX9131) \
 	|| defined(CONFIG_SOC_MIMX9111)
 	*rate = CLOCK_GetIpFreq(clock_root);
 #else
@@ -466,7 +466,7 @@ static int CCM_SET_FUNC_ATTR mcux_ccm_set_subsys_rate(const struct device *dev,
 		return mipi_csi2rx_clock_set_freq(kCLOCK_Root_Csi2_Esc, clock_rate);
 #endif
 
-#if defined(CONFIG_SOC_MIMX9352)
+#if defined(CONFIG_SOC_MIMX9596_M33) || defined(CONFIG_SOC_MIMX9352)
 	case IMX_CCM_MEDIA_AXI_CLK:
 	case IMX_CCM_MEDIA_APB_CLK:
 	case IMX_CCM_MEDIA_DISP_PIX_CLK:

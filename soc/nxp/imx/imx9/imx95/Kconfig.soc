@@ -5,6 +5,12 @@ config SOC_MIMX9596
 	bool
 	select SOC_SERIES_IMX9
 
+config SOC_MIMX9596_M33
+	bool
+	select SOC_MIMX9596
+	help
+	  NXP i.MX95 M33
+
 config SOC_MIMX9596_M7
 	bool
 	select SOC_MIMX9596
